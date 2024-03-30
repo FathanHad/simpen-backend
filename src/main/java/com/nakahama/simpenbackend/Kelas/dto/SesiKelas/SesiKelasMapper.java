@@ -7,6 +7,15 @@ import com.nakahama.simpenbackend.Kelas.model.SesiKelas;
 
 public class SesiKelasMapper {
 
+    public static List<SesiKelasDTO> toListDto(List<SesiKelas> request) {
+        List<SesiKelasDTO> response = new ArrayList<>();
+        for (SesiKelas sesiKelas : request) {
+            SesiKelasDTO dto = toDto(sesiKelas);
+            response.add(dto);
+        }
+        return response;
+    }
+
     public static SesiKelasDTO toDto(SesiKelas request) {
         SesiKelasDTO response = new SesiKelasDTO();
         response.setSesi_id(request.getId());

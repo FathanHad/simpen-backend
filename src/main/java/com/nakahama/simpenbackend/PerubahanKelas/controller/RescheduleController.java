@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.nakahama.simpenbackend.PerubahanKelas.service.RescheduleService;
 import com.nakahama.simpenbackend.util.ResponseUtil;
+import com.nakahama.simpenbackend.Kelas.dto.SesiKelas.SesiKelasMapper;
+import com.nakahama.simpenbackend.Kelas.model.SesiKelas;
+import com.nakahama.simpenbackend.Kelas.service.SesiKelasService;
 import com.nakahama.simpenbackend.PerubahanKelas.dto.Reschedule.CreateReschedule;
 import com.nakahama.simpenbackend.PerubahanKelas.dto.Reschedule.RescheduleMapper;
 import com.nakahama.simpenbackend.PerubahanKelas.model.Reschedule;
@@ -25,7 +28,16 @@ public class RescheduleController {
     @Autowired
     RescheduleService rescheduleService;
 
-    @PostMapping("")
+    @Autowired
+    SesiKelasService sesiKelasService;
+
+    @GetMapping("/create/{kelasId}")
+    public ResponseEntity<Object> createReschedule(@PathVariable int kelasId) {
+        List<SesiKelas> listSesiKelas = sesiKelasService.getByKelasId(kelasId);
+        return ResponseUtil.okResponse(SesiKelasMapper.toListDto(listSesiKelas), "Success");
+    }
+
+    @PostMapping("/create/{kelasId}")
     public ResponseEntity<Object> createReschedule(@Valid @RequestBody List<CreateReschedule> rescheduleRequest) {
         rescheduleService.save(rescheduleRequest);
         return ResponseUtil.okResponse(null, rescheduleRequest.size() + " Reschedule created");

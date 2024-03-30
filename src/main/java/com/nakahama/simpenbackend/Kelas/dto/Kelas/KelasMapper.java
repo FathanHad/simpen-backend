@@ -83,9 +83,7 @@ public class KelasMapper {
         response.setJenisKelasName(createdKelas.getJenisKelas().getNama());
         response.setJenisKelasId(createdKelas.getJenisKelas().getId());
         response.setListSesi(new ArrayList<SesiKelasDTO>());
-        for (SesiKelas sesiKelas : listSesiKelas) {
-            response.getListSesi().add(SesiKelasMapper.toDto(sesiKelas));
-        }
+        response.setListSesi(SesiKelasMapper.toListDto(listSesiKelas));
         response.setNamaPengajar(pengajar.getNama());
         response.setTanggalMulai(createdKelas.getTanggalMulai());
         response.setTanggalSelesai(createdKelas.getTanggalSelesai());
