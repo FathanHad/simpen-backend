@@ -17,7 +17,7 @@ import lombok.*;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "kelas")
+@Table(name = "reschedule")
 public class Reschedule {
 
     @Id

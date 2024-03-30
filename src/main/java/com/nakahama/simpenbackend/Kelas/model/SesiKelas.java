@@ -1,6 +1,7 @@
 package com.nakahama.simpenbackend.Kelas.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.nakahama.simpenbackend.PerubahanKelas.model.Reschedule;
 import com.nakahama.simpenbackend.User.model.Pengajar;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -58,5 +59,8 @@ public class SesiKelas {
     private double persentaseKehadiran;
 
     private double averageRating;
+
+    @OneToMany(mappedBy = "sesiKelas", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Reschedule> reschedule;
 
 }
