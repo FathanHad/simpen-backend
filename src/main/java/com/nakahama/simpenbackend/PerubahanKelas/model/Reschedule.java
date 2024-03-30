@@ -1,0 +1,46 @@
+package com.nakahama.simpenbackend.PerubahanKelas.model;
+
+import com.nakahama.simpenbackend.Kelas.model.Kelas;
+import com.nakahama.simpenbackend.Kelas.model.SesiKelas;
+import java.time.LocalDateTime;
+import java.util.*;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.*;
+import lombok.*;
+
+@Entity
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "kelas")
+public class Reschedule {
+
+    @Id
+    private UUID id;
+
+    @NotNull
+    private Kelas kelas;
+
+    @NotNull
+    private SesiKelas sesiKelas;
+
+    @NotNull
+    private LocalDateTime waktuAwal;
+
+    @NotNull
+    private LocalDateTime waktuBaru;
+
+    @NotNull
+    private String alasan;
+
+    @NotNull
+    private String status = "Requested";
+
+    @NotNull
+    private LocalDateTime waktuPermintaan;
+
+}
