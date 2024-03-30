@@ -18,5 +18,5 @@ public class ReadDetailReschedule {
 
     private ReadKelas kelas;
 
-    private List<ReadRescheduleSesi> listRescheduleSesi;
+    private List<ReadRescheduleSesi> listSesiReschedule;
 }

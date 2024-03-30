@@ -1,9 +1,11 @@
 package com.nakahama.simpenbackend.PerubahanKelas.dto.Reschedule;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.nakahama.simpenbackend.Kelas.dto.Kelas.KelasMapper;
+import com.nakahama.simpenbackend.Kelas.dto.SesiKelas.SesiKelasMapper;
 import com.nakahama.simpenbackend.Kelas.model.SesiKelas;
 import com.nakahama.simpenbackend.PerubahanKelas.model.Reschedule;
 
@@ -20,24 +22,36 @@ public class RescheduleMapper {
         return response;
     }
 
-    public static ReadRescheduleSesi toReadRescheduleSesi(Reschedule request) {
+    public static ReadRescheduleSesi toReadRescheduleSesi(SesiKelas request) {
         ReadRescheduleSesi response = new ReadRescheduleSesi();
-        response.setId(request.getId());
-        response.setSesiKelas(request.getSesiKelas());
-        response.setWaktuAwal(request.getWaktuAwal());
-        response.setWaktuBaru(request.getWaktuBaru());
-        response.setAlasan(request.getAlasan());
-        response.setStatus(request.getStatus());
+        response.setSesiKelas(SesiKelasMapper.toDto(request));
+        response.setListReschedule(new ArrayList<>());
+
+        for (Reschedule reschedule : request.getListReschedule()) {
+            ReadReschedule readReschedule = toReadReschedule(reschedule);
+            response.getListReschedule().add(readReschedule);
+        }
 
         return response;
     }
 
-    public static ReadDetailReschedule toReadDetailReschedule(List<Reschedule> request) {
+    private static ReadReschedule toReadReschedule(Reschedule request) {
+        ReadReschedule response = new ReadReschedule();
+        response.setId(request.getId());
+        response.setWaktuAwal(request.getWaktuAwal());
+        response.setWaktuBaru(request.getWaktuBaru());
+        response.setAlasan(request.getAlasan());
+        response.setStatus(request.getStatus());
+        return response;
+    }
+
+    public static ReadDetailReschedule toReadDetailReschedule(List<SesiKelas> request) {
         ReadDetailReschedule response = new ReadDetailReschedule();
         response.setKelas(KelasMapper.toReadDto(request.get(0).getKelas()));
-        for (Reschedule reschedule : request) {
-            ReadRescheduleSesi readRescheduleSesi = toReadRescheduleSesi(reschedule);
-            response.getListRescheduleSesi().add(readRescheduleSesi);
+        response.setListSesiReschedule(new ArrayList<>());
+        for (SesiKelas sesiKelas : request) {
+            ReadRescheduleSesi readRescheduleSesi = toReadRescheduleSesi(sesiKelas);
+            response.getListSesiReschedule().add(readRescheduleSesi);
         }
         return response;
     }

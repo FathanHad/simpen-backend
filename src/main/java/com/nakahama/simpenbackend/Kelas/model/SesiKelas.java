@@ -61,6 +61,6 @@ public class SesiKelas {
     private double averageRating;
 
     @OneToMany(mappedBy = "sesiKelas", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Reschedule> reschedule;
+    private List<Reschedule> listReschedule;
 
 }

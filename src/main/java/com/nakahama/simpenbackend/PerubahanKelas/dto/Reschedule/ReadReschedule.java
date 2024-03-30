@@ -1,5 +1,7 @@
 package com.nakahama.simpenbackend.PerubahanKelas.dto.Reschedule;
 
+import java.time.LocalDateTime;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -14,9 +16,17 @@ import com.nakahama.simpenbackend.Kelas.dto.SesiKelas.SesiKelasDTO;
 @Data
 @Getter
 @Setter
-public class ReadRescheduleSesi {
+public class ReadReschedule {
+
+    private UUID id;
 
     private SesiKelasDTO sesiKelas;
 
-    private List<ReadReschedule> listReschedule;
+    private LocalDateTime waktuAwal;
+
+    private LocalDateTime waktuBaru;
+
+    private String alasan;
+
+    private String status;
 }
