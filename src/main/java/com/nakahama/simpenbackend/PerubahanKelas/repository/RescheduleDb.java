@@ -13,7 +13,7 @@ import java.util.*;
 @Repository
 @Transactional
 public interface RescheduleDb extends JpaRepository<Reschedule, UUID> {
-    Optional<Reschedule> findById(int id);
+    Optional<Reschedule> findById(UUID id);
 
     List<Reschedule> findAllByKelas(Kelas kelas);
 

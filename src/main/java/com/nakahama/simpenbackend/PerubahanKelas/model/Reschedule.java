@@ -7,6 +7,7 @@ import java.util.*;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -23,9 +24,11 @@ public class Reschedule {
     private UUID id;
 
     @NotNull
+    @ManyToOne
     private Kelas kelas;
 
     @NotNull
+    @ManyToOne
     private SesiKelas sesiKelas;
 
     @NotNull
