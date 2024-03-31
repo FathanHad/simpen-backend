@@ -45,4 +45,6 @@ public class ReadDetailKelas {
 
     private String platform; // need to delete after platform model created (sprint 2)
 
+    private String status;
+
 }
