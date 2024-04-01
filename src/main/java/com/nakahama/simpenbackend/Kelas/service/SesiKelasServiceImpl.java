@@ -60,6 +60,7 @@ public class SesiKelasServiceImpl implements SesiKelasService {
         List<SesiKelas> sesiKelas = sesiKelasDb.findAllByKelas(kelas);
         if (sesiKelas == null)
             throw new NoSuchElementException("Sesi Kelas with kelas " + kelas + " not found");
+        sesiKelas.sort(Comparator.comparing(SesiKelas::getNomorPertemuan));
         return sesiKelas;
     }
 

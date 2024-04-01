@@ -30,7 +30,6 @@ public class SesiKelasMapper {
             ReadDetailSesiKelas detailSesiKelas = toReadDetailDto(sesiKelas);
             response.add(detailSesiKelas);
         }
-        response.sort(Comparator.comparing(ReadDetailSesiKelas::getNomorPertemuan));
         return response;
     }
 
