@@ -16,7 +16,5 @@ import com.nakahama.simpenbackend.Kelas.dto.Kelas.ReadKelas;
 @Setter
 public class ReadDetailReschedule {
 
-    private ReadKelas kelas;
-
     private List<ReadRescheduleSesi> listSesiReschedule;
 }

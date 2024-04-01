@@ -12,11 +12,12 @@ import com.nakahama.simpenbackend.PerubahanKelas.model.Reschedule;
 public class RescheduleMapper {
     public static Reschedule toEntity(CreateReschedule request, SesiKelas sesiKelas) {
         Reschedule response = new Reschedule();
-        response.setWaktuAwal(request.getWaktuAwal());
         response.setWaktuBaru(request.getWaktuBaru());
         response.setAlasan(request.getAlasan());
         response.setStatus(request.getStatus());
         response.setSesiKelas(sesiKelas);
+        response.setKelas(sesiKelas.getKelas());
+        response.setWaktuAwal(sesiKelas.getWaktuPelaksanaan());
         response.setWaktuPermintaan(LocalDateTime.now());
 
         return response;
@@ -47,7 +48,6 @@ public class RescheduleMapper {
 
     public static ReadDetailReschedule toReadDetailReschedule(List<SesiKelas> request) {
         ReadDetailReschedule response = new ReadDetailReschedule();
-        response.setKelas(KelasMapper.toReadDto(request.get(0).getKelas()));
         response.setListSesiReschedule(new ArrayList<>());
         for (SesiKelas sesiKelas : request) {
             ReadRescheduleSesi readRescheduleSesi = toReadRescheduleSesi(sesiKelas);

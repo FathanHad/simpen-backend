@@ -21,7 +21,7 @@ import lombok.*;
 public class Reschedule {
 
     @Id
-    private UUID id;
+    private UUID id = UUID.randomUUID();
 
     @NotNull
     @ManyToOne

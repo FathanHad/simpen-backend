@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.*;
 
-import com.nakahama.simpenbackend.Kelas.dto.SesiKelas.SesiKelasDTO;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,10 +20,10 @@ public class ReadReschedule {
 
     private UUID id;
 
-    private SesiKelasDTO sesiKelas;
-
+    @JsonFormat(pattern = "MM-dd-yyyy HH:mm:ss")
     private LocalDateTime waktuAwal;
 
+    @JsonFormat(pattern = "MM-dd-yyyy HH:mm:ss")
     private LocalDateTime waktuBaru;
 
     private String alasan;

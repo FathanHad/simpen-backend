@@ -33,10 +33,20 @@ public class RescheduleServiceImpl implements RescheduleService {
 
     @Override
     public void save(List<CreateReschedule> rescheduleRequest) {
+        List<Reschedule> reschedulesToCreate = new ArrayList<>();
         for (CreateReschedule request : rescheduleRequest) {
             SesiKelas sesiKelasRequested = sesiKelasService.getById(request.getSesiKelasId());
-            rescheduleDb.save(RescheduleMapper.toEntity(request, sesiKelasRequested));
+            if (!sesiKelasRequested.getStatus().equals("Scheduled")) {
+                throw new IllegalArgumentException(
+                        "SesiKelas with id " + request.getSesiKelasId() + " is not scheduled");
+            }
+            reschedulesToCreate.add(RescheduleMapper.toEntity(request, sesiKelasRequested));
         }
+        for (Reschedule reschedule : reschedulesToCreate) {
+            reschedule.getSesiKelas().setStatus("Reschedule Requested");
+            rescheduleDb.save(reschedule);
+        }
+
     }
 
     @Override

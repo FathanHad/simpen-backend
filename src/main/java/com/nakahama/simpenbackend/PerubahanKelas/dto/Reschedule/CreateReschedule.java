@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -20,10 +22,8 @@ public class CreateReschedule {
     @NotNull(message = "Id Sesi is mandatory")
     private UUID sesiKelasId;
 
-    @NotNull(message = "Waktu Awal is mandatory")
-    private LocalDateTime waktuAwal;
-
     @NotNull(message = "Waktu Baru is mandatory")
+    @JsonFormat(pattern = "MM-dd-yyyy HH:mm:ss")
     private LocalDateTime waktuBaru;
 
     @NotNull(message = "Alasan is mandatory")
