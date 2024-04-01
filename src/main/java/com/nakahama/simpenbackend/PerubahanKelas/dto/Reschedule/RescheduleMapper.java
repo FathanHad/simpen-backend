@@ -43,6 +43,7 @@ public class RescheduleMapper {
         response.setWaktuBaru(request.getWaktuBaru());
         response.setAlasan(request.getAlasan());
         response.setStatus(request.getStatus());
+        response.setWaktuPermintaan(request.getWaktuPermintaan());
         return response;
     }
 

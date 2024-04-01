@@ -26,6 +26,9 @@ public class ReadReschedule {
     @JsonFormat(pattern = "MM-dd-yyyy HH:mm:ss")
     private LocalDateTime waktuBaru;
 
+    @JsonFormat(pattern = "MM-dd-yyyy HH:mm:ss")
+    private LocalDateTime waktuPermintaan;
+
     private String alasan;
 
     private String status;
