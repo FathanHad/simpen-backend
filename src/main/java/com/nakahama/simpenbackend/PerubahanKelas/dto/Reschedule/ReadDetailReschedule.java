@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.*;
 
-import com.nakahama.simpenbackend.Kelas.dto.Kelas.ReadKelas;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

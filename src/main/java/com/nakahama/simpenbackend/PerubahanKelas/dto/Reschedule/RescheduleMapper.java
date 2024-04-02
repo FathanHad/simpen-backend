@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.nakahama.simpenbackend.Kelas.dto.Kelas.KelasMapper;
 import com.nakahama.simpenbackend.Kelas.dto.SesiKelas.SesiKelasMapper;
 import com.nakahama.simpenbackend.Kelas.model.SesiKelas;
 import com.nakahama.simpenbackend.PerubahanKelas.model.Reschedule;
