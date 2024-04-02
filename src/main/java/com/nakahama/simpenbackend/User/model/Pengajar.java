@@ -11,6 +11,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nakahama.simpenbackend.Kelas.model.Kelas;
@@ -87,7 +89,7 @@ public class Pengajar extends UserModel {
     @Column(name = "no_telp_darurat")
     private String noTelpDarurat;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+    @ManyToMany
     @JoinTable(name = "pengajar_tag", joinColumns = @JoinColumn(name = "idPengajar"), inverseJoinColumns = @JoinColumn(name = "id"))
     private List<Tag> listTag;
 
