@@ -9,6 +9,8 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -26,5 +28,8 @@ public class ReadPermintaanPerubahan {
 
     private String status;
 
+    private String tipePermintaan;
+
+    @JsonFormat(pattern = "MM-dd-yyyy HH:mm:ss")
     private LocalDateTime waktuPermintaan;
 }
