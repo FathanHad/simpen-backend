@@ -18,5 +18,11 @@ public class ReadRescheduleSesi {
 
     private SesiKelasDTO sesiKelas;
 
+    private ReadReschedule activeReschedule;
+
+    private String activeRescheduleDate = "";
+
+    private String activeRescheduleTime = "";
+
     private List<ReadReschedule> listReschedule;
 }

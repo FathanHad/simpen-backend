@@ -32,6 +32,16 @@ public class RescheduleMapper {
             response.getListReschedule().add(readReschedule);
         }
 
+        if (response.getListReschedule().size() > 0) {
+            ReadReschedule latest = response.getListReschedule().get(response.getListReschedule().size() - 1);
+            if (latest.getStatus().equals("Requested")) {
+                response.setActiveReschedule(response.getListReschedule().get(response.getListReschedule().size() - 1));
+                response.setActiveRescheduleDate(
+                        response.getActiveReschedule().getWaktuBaru().toLocalDate().toString());
+                response.setActiveRescheduleTime(
+                        response.getActiveReschedule().getWaktuBaru().toLocalTime().toString());
+            }
+        }
         return response;
     }
 
