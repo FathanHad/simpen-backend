@@ -34,8 +34,9 @@ public class GantiPengajarMapper {
                 response.setActiveGantiPengajar(
                         response.getListGantiPengajar().get(response.getListGantiPengajar().size() - 1));
                 response.setActiveGantiPengajarNamaPengajar(
-                        response.getActiveGantiPengajar().getIdPengajar().toString());
-                response.setActiveGantiPengajarNamaPengajar(response.getActiveGantiPengajar().getNamaPengajar());
+                        response.getActiveGantiPengajar().getIdPengajarPengganti().toString());
+                response.setActiveGantiPengajarNamaPengajar(
+                        response.getActiveGantiPengajar().getNamaPengajarPenggati());
             }
         }
         return response;
@@ -44,10 +45,11 @@ public class GantiPengajarMapper {
     private static ReadGantiPengajar toReadGantiPengajar(PengajarMenggantikan request) {
         ReadGantiPengajar response = new ReadGantiPengajar();
         response.setId(request.getId());
-        response.setIdPengajar(request.getPengajarPenganti().getId());
-        response.setNamaPengajar(request.getPengajarPenganti().getNama());
+        response.setIdPengajarPengganti(request.getPengajarPenganti().getId());
+        response.setNamaPengajarPenggati(request.getPengajarPenganti().getNama());
         response.setAlasan(request.getAlasan());
         response.setStatus(request.getStatus());
+        response.setWaktuPermintaan(request.getWaktuPermintaan());
         return response;
     }
 

@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.LocalDateTime;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -16,11 +19,14 @@ public class ReadGantiPengajar {
 
     private UUID id;
 
-    private String namaPengajar;
+    private String namaPengajarPenggati;
 
-    private UUID idPengajar;
+    private UUID idPengajarPengganti;
 
     private String alasan;
 
     private String status;
+
+    @JsonFormat(pattern = "MM-dd-yyyy HH:mm:ss")
+    private LocalDateTime waktuPermintaan;
 }
