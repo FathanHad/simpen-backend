@@ -7,6 +7,7 @@ import java.util.List;
 import com.nakahama.simpenbackend.Kelas.dto.SesiKelas.SesiKelasMapper;
 import com.nakahama.simpenbackend.Kelas.model.SesiKelas;
 import com.nakahama.simpenbackend.PerubahanKelas.model.PengajarMenggantikan;
+import com.nakahama.simpenbackend.User.model.UserModel;
 
 public class GantiPengajarMapper {
     public static PengajarMenggantikan toEntity(CreateGantiPengajar request, SesiKelas sesiKelas) {
@@ -33,10 +34,13 @@ public class GantiPengajarMapper {
             if (latest.getStatus().equals("Requested")) {
                 response.setActiveGantiPengajar(
                         response.getListGantiPengajar().get(response.getListGantiPengajar().size() - 1));
-                response.setActiveGantiPengajarNamaPengajar(
-                        response.getActiveGantiPengajar().getIdPengajarPengganti().toString());
-                response.setActiveGantiPengajarNamaPengajar(
-                        response.getActiveGantiPengajar().getNamaPengajarPenggati());
+                ReadGantiPengajar activeGantiPengajar = response.getActiveGantiPengajar();
+                if (activeGantiPengajar.getIdPengajarPengganti() != null) {
+                    response.setActiveGantiPengajarNamaPengajar(
+                            response.getActiveGantiPengajar().getIdPengajarPengganti().toString());
+                    response.setActiveGantiPengajarNamaPengajar(
+                            response.getActiveGantiPengajar().getNamaPengajarPenggati());
+                }
             }
         }
         return response;
@@ -45,8 +49,11 @@ public class GantiPengajarMapper {
     private static ReadGantiPengajar toReadGantiPengajar(PengajarMenggantikan request) {
         ReadGantiPengajar response = new ReadGantiPengajar();
         response.setId(request.getId());
-        response.setIdPengajarPengganti(request.getPengajarPenganti().getId());
-        response.setNamaPengajarPenggati(request.getPengajarPenganti().getNama());
+        UserModel pengajarPengganti = request.getPengajarPenganti();
+        if (pengajarPengganti != null) {
+            response.setIdPengajarPengganti(request.getPengajarPenganti().getId());
+            response.setNamaPengajarPenggati(request.getPengajarPenganti().getNama());
+        }
         response.setAlasan(request.getAlasan());
         response.setStatus(request.getStatus());
         response.setWaktuPermintaan(request.getWaktuPermintaan());

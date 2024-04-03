@@ -19,7 +19,7 @@ public class ReadGantiPengajar {
 
     private UUID id;
 
-    private String namaPengajarPenggati;
+    private String namaPengajarPenggati = "";
 
     private UUID idPengajarPengganti;
 
