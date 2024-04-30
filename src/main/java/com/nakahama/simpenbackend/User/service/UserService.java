@@ -48,4 +48,6 @@ public interface UserService {
     public List<UserModel> getAllPengajar();
 
     public List<UserModel> getAllPengajarByAvailability(String hari, String waktuStart, String waktuEnd);
+
+    public UserModel getPengajar(UUID fromString);
 }

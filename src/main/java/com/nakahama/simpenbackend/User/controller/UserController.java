@@ -22,7 +22,7 @@ import com.nakahama.simpenbackend.User.model.Operasional;
 import com.nakahama.simpenbackend.User.model.Pengajar;
 import com.nakahama.simpenbackend.User.model.UserModel;
 import com.nakahama.simpenbackend.User.repository.UserDb;
-import com.nakahama.simpenbackend.User.service.UserServiceImpl;
+import com.nakahama.simpenbackend.User.service.UserService;
 import com.nakahama.simpenbackend.util.ResponseUtil;
 import com.nakahama.simpenbackend.Notification.dto.GenerateNotifDTO;
 import com.nakahama.simpenbackend.Notification.service.NotificationService;
@@ -43,7 +43,7 @@ import java.time.temporal.ChronoUnit;
 public class UserController {
 
     @Autowired
-    UserServiceImpl userService;
+    UserService userService;
 
     @Autowired
     UserDb userDb;
@@ -161,6 +161,12 @@ public class UserController {
     @GetMapping("/pengajar")
     public ResponseEntity<Object> getAllPengajar() {
         List<UserModel> response = userService.getAllPengajar();
+        return ResponseUtil.okResponse(response, "Success");
+    }
+
+    @GetMapping("/pengajar/{id}")
+    public ResponseEntity<Object> getPengajar(@PathVariable("id") String id) {
+        UserModel response = userService.getPengajar(UUID.fromString(id));
         return ResponseUtil.okResponse(response, "Success");
     }
 

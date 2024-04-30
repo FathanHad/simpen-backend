@@ -30,7 +30,7 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/absen-pengajar")
 public class AbsenPengajarController {
-    
+
     @Autowired
     AbsenPengajarService absenPengajarService;
 
@@ -45,8 +45,9 @@ public class AbsenPengajarController {
 
     @SuppressWarnings("deprecation")
     @PostMapping("")
-    public ResponseEntity<Object> createAbsen(@Valid @RequestBody createAbsenPengajarDTO absenPengajarDTO,HttpServletRequest request) {
-        absenPengajarDTO.setPengajar((Pengajar)(authService.getLoggedUser(request)));
+    public ResponseEntity<Object> createAbsen(@Valid @RequestBody createAbsenPengajarDTO absenPengajarDTO,
+            HttpServletRequest request) {
+        absenPengajarDTO.setPengajar((Pengajar) (authService.getLoggedUser(request)));
         absenPengajarService.createAbsen(absenPengajarDTO);
 
         return ResponseUtil.okResponse(absenPengajarDTO, "Success");
@@ -55,15 +56,15 @@ public class AbsenPengajarController {
 
     @SuppressWarnings("deprecation")
     @GetMapping("")
-    public ResponseEntity<Object> getAllAbsen( HttpServletRequest request) {
+    public ResponseEntity<Object> getAllAbsen(HttpServletRequest request) {
         String role = authService.getRoleLoggedUser(request);
         List<ReadAbsenPengajar> listAbsenPengajar = new ArrayList<ReadAbsenPengajar>();
         if (role.equals("pengajar")) {
-            for (AbsenPengajar absenPengajar : absenPengajarService.getAllAbsenPengajar(authService.getLoggedUser(request))) {
+            for (AbsenPengajar absenPengajar : absenPengajarService
+                    .getAllAbsenPengajar(authService.getLoggedUser(request))) {
                 listAbsenPengajar.add(AbsenPengajarMapper.toReadDto(absenPengajar));
             }
-        }
-        else{
+        } else {
             for (AbsenPengajar absenPengajar : absenPengajarService.getAll()) {
                 listAbsenPengajar.add(AbsenPengajarMapper.toReadDto(absenPengajar));
             }

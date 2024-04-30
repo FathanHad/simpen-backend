@@ -313,4 +313,13 @@ public class UserServiceImpl implements UserService {
         List<UserModel> listPengajar = userDb.findPengajarByAvailability(start, end);
         return listPengajar;
     }
+
+    @Override
+    public UserModel getPengajar(UUID id) {
+        UserModel pengajar = getUserById(id);
+        if (!pengajar.getRole().equals("pengajar"))
+            throw new BadRequestException("User with id " + id + " is not a pengajar");
+
+        return pengajar;
+    }
 }

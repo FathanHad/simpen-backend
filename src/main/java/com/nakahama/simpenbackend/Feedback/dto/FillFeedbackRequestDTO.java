@@ -18,12 +18,12 @@ import lombok.Setter;
 @NoArgsConstructor
 public class FillFeedbackRequestDTO {
 
-    @NotBlank(message = "Id required")
+    // @NotBlank(message = "Id required")
     UUID id;
 
     @NotBlank(message = "Isi required")
     String isi;
 
-    @NotBlank(message = "Rating required")
+    // @NotBlank(message = "Rating required")
     Double rating;
 }

@@ -213,6 +213,8 @@ public class SesiKelasServiceImpl implements SesiKelasService {
         }
         save(sesiKelas);
 
+        feedbackService.generateFeedback(sesiKelas.getKelas());
+
     }
 
     @Override

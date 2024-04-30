@@ -58,6 +58,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 
         feedback.setIsi(fillFeedbackRequestDTO.getIsi());
         feedback.setRating(fillFeedbackRequestDTO.getRating());
+        feedback.setFinished(true);
 
         feedbackDb.save(feedback);
 
