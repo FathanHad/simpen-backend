@@ -97,6 +97,12 @@ public class SecurityConfig {
                                         // Sesi
                                         auth.requestMatchers("sesi").authenticated();
 
+                                        //absen
+                                        auth.requestMatchers(HttpMethod.POST, "absen-pengajar").hasAnyAuthority("pengajar");
+                                        auth.requestMatchers(HttpMethod.GET, "absen-pengajar").hasAnyAuthority("pengajar",
+                                                        "operasional", "akademik");
+                                        auth.requestMatchers(HttpMethod.GET, "absen-pengajar/**").hasAnyAuthority("pengajar", "operasional", "akademik");
+
                                         // Perubahan Kelas
                                         auth.requestMatchers(HttpMethod.POST, "/ganti-pengajar/**")
                                                         .hasAnyAuthority("pengajar");
