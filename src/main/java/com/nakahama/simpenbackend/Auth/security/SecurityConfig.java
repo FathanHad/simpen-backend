@@ -50,6 +50,10 @@ public class SecurityConfig {
                                                         "akademik");
                                         auth.requestMatchers(HttpMethod.GET, "tag").hasAnyAuthority("operasional",
                                                         "akademik");
+                                        auth.requestMatchers(HttpMethod.PUT, "tag").hasAnyAuthority("operasional",
+                                                        "akademik");
+                                        auth.requestMatchers(HttpMethod.DELETE, "tag/**").hasAnyAuthority("operasional",
+                                                        "akademik");
                                         auth.requestMatchers(HttpMethod.POST, "tag/assign")
                                                         .hasAnyAuthority("operasional", "akademik");
                                         auth.requestMatchers(HttpMethod.GET, "tag/assign")
@@ -110,7 +114,7 @@ public class SecurityConfig {
                                                         .hasAnyAuthority("operasional");
 
                                         // TODO: set the appropriate authorities for the corresponding endpoints
-                                        // auth.anyRequest().permitAll();
+                                        auth.anyRequest().permitAll();
 
                                 })
                                 .sessionManagement(sessionAuthenticationStrategy -> sessionAuthenticationStrategy
