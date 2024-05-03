@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nakahama.simpenbackend.Auth.service.AuthService;
 import com.nakahama.simpenbackend.Feedback.dto.FillFeedbackRequestDTO;
 import com.nakahama.simpenbackend.Feedback.model.Feedback;
 import com.nakahama.simpenbackend.Feedback.service.FeedbackService;
@@ -26,6 +27,9 @@ public class FeedbackController {
     @Autowired
     FeedbackService feedbackService;
 
+    @Autowired
+    AuthService authService;
+
     @GetMapping("")
     public ResponseEntity<Object> getAllFeedback() {
         List<Feedback> listFeedback = feedbackService.retrieveAllFeedback();
@@ -36,6 +40,15 @@ public class FeedbackController {
     public ResponseEntity<Object> getFeedbackByUser(@PathVariable("id") String id) {
         List<Feedback> listFeedback = feedbackService.feedbackByUserId(UUID.fromString(id));
         return ResponseUtil.okResponse(listFeedback, "Success");
+
+        // if (authService.checkOwnership(request, UUID.fromString(id))) {
+        // List<Feedback> listFeedback =
+        // feedbackService.feedbackByUserId(UUID.fromString(id));
+        // return ResponseUtil.okResponse(listFeedback, "Success");
+        // } else {
+        // return ResponseUtil.okResponse(null, "Unauthorized");
+
+        // }
     }
 
     @PutMapping("")

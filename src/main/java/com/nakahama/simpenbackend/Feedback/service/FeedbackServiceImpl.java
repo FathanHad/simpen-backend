@@ -12,6 +12,8 @@ import com.nakahama.simpenbackend.Feedback.dto.FillFeedbackRequestDTO;
 import com.nakahama.simpenbackend.Feedback.model.Feedback;
 import com.nakahama.simpenbackend.Feedback.repository.FeedbackDb;
 import com.nakahama.simpenbackend.Kelas.model.Kelas;
+import com.nakahama.simpenbackend.Notification.dto.GenerateNotifDTO;
+import com.nakahama.simpenbackend.Notification.service.NotificationService;
 import com.nakahama.simpenbackend.exception.BadRequestException;
 
 @Service
@@ -19,6 +21,9 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     @Autowired
     FeedbackDb feedbackDb;
+
+    @Autowired
+    NotificationService notificationService;
 
     @Override
     public List<Feedback> retrieveAllFeedback() {
@@ -96,6 +101,15 @@ public class FeedbackServiceImpl implements FeedbackService {
             feedback.setTanggalPembuatan(LocalDateTime.now());
 
             feedbackDb.save(feedback);
+
+            GenerateNotifDTO notification = new GenerateNotifDTO();
+
+            notification.setAkunPenerima(kelas.getPengajar().getId());
+            notification.setTipe(2);
+            notification.setJudul("Anda mendapatkan feedback");
+            notification.getIsi().put("feedbackId", String.valueOf(feedback.getId()));
+            notificationService.generateNotification(notification);
+
         }
     }
 

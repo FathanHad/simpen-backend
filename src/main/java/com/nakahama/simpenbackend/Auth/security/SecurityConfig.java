@@ -97,11 +97,14 @@ public class SecurityConfig {
                                         // Sesi
                                         auth.requestMatchers("sesi").authenticated();
 
-                                        //absen
-                                        auth.requestMatchers(HttpMethod.POST, "absen-pengajar").hasAnyAuthority("pengajar");
-                                        auth.requestMatchers(HttpMethod.GET, "absen-pengajar").hasAnyAuthority("pengajar",
+                                        // absen
+                                        auth.requestMatchers(HttpMethod.POST, "absen-pengajar")
+                                                        .hasAnyAuthority("pengajar");
+                                        auth.requestMatchers(HttpMethod.GET, "absen-pengajar").hasAnyAuthority(
+                                                        "pengajar",
                                                         "operasional", "akademik");
-                                        auth.requestMatchers(HttpMethod.GET, "absen-pengajar/**").hasAnyAuthority("pengajar", "operasional", "akademik");
+                                        auth.requestMatchers(HttpMethod.GET, "absen-pengajar/**")
+                                                        .hasAnyAuthority("pengajar", "operasional", "akademik");
 
                                         // Perubahan Kelas
                                         auth.requestMatchers(HttpMethod.POST, "/ganti-pengajar/**")
@@ -119,6 +122,17 @@ public class SecurityConfig {
                                         auth.requestMatchers(HttpMethod.GET, "/permintaan-perubahan")
                                                         .hasAnyAuthority("operasional");
 
+                                        // Feedback & Rating
+                                        auth.requestMatchers(HttpMethod.GET, "/rating/**")
+                                                        .hasAnyAuthority("akademik", "pengajar");
+                                        auth.requestMatchers(HttpMethod.GET, "/feedback")
+                                                        .hasAuthority("akademik");
+                                        auth.requestMatchers(HttpMethod.PUT, "/feedback")
+                                                        .hasAuthority("akademik");
+                                        auth.requestMatchers(HttpMethod.GET, "/feedback/**")
+                                                        .hasAnyAuthority("akademik", "pengajar");
+                                        auth.requestMatchers(HttpMethod.DELETE, "/feedback/**")
+                                                        .hasAnyAuthority("akademik");
                                         // TODO: set the appropriate authorities for the corresponding endpoints
                                         auth.anyRequest().permitAll();
 
