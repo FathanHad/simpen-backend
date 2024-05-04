@@ -1,5 +1,6 @@
 package com.nakahama.simpenbackend.User.repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,12 +17,17 @@ import jakarta.transaction.Transactional;
 
 @Repository
 @Transactional
-public interface AvailabilityDb extends JpaRepository<Availability, UUID>{
+public interface AvailabilityDb extends JpaRepository<Availability, UUID> {
     @Modifying
     @Query("DELETE FROM Availability m WHERE m.pengajar = :pengajar")
     void deleteByPengajar(@Param("pengajar") Pengajar pengajar);
 
     @Query("SELECT m FROM Availability m WHERE m.pengajar = :pengajar")
     List<Availability> findByPengajar(@Param("pengajar") Pengajar pengajar);
-    
+
+    @Modifying
+    @Query("DELETE FROM Availability m WHERE m.pengajar = :pengajar AND m.waktu BETWEEN :waktustart AND :waktuEnd")
+    void deleteByPengajarAndWaktu(@Param("pengajar") Pengajar pengajar, @Param("waktustart") LocalDateTime waktuStart,
+            @Param("waktuEnd") LocalDateTime waktuEnd);
+
 }

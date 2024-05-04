@@ -19,6 +19,7 @@ import com.nakahama.simpenbackend.Kelas.repository.JenisKelas.JenisKelasDb;
 import com.nakahama.simpenbackend.User.model.Pengajar;
 import com.nakahama.simpenbackend.User.model.UserModel;
 import com.nakahama.simpenbackend.User.repository.PengajarDb;
+import com.nakahama.simpenbackend.User.service.AvailabilityService;
 import com.nakahama.simpenbackend.User.service.UserService;
 
 @Service
@@ -51,6 +52,9 @@ public class KelasServiceImpl implements KelasService {
     @Autowired
     MuridKelasService muridKelasService;
 
+    @Autowired
+    AvailabilityService availabilityService;
+
     @Override
     public List<Kelas> getAll() {
         return kelasDb.findAll();
@@ -81,6 +85,7 @@ public class KelasServiceImpl implements KelasService {
         createdKelas.setListsesiKelas(listSesiKelas);
 
         kelasDb.save(createdKelas);
+        availabilityService.deleteAvailability(pengajar, listSesiKelas.get(0).getWaktuPelaksanaan());
 
         if (jenisKelas.getKelas().size() == 0) {
             jenisKelas.setKelas(new ArrayList<Kelas>());
